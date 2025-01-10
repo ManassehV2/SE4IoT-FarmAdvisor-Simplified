@@ -109,7 +109,7 @@ To stop the running containers, use:
 
 Below is the system architecture of the application:
 
-![System Architecture](./GDD_System_Architecture.png)
+![System Architecture](./System_Architecture.png)
 
 ## Demo Video 
 
