@@ -1,0 +1,11 @@
+.sidebar {
+  transition: transform 0.3s ease;
+}
+
+.sidebar.d-none {
+  transform: translateX(-100%); /* Slide sidebar out */
+}
+
+main {
+  transition: margin-left 0.3s ease;
+}

@@ -1,0 +1,9 @@
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+.nav-link.active {
+  background-color: #32cd32 !important;
+  color: white !important;
+  font-weight: bold;
+}

@@ -1,0 +1,26 @@
+.card {
+  border-radius: 12px;
+}
+
+.card-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.input-group .btn {
+  border-radius: 0;
+}
+
+.list-group-item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.list-group-item i {
+  font-size: 1.2rem;
+  margin-right: 10px;
+  color: #6c757d;
+}
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}

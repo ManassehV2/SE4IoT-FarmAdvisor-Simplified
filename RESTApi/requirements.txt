@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+sqlalchemy 
+pymysql
+pydantic
+cryptography>=3.4.7
+azure-data-tables
+python-jose
+authlib

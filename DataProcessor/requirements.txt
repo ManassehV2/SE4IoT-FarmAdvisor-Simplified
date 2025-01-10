@@ -1,0 +1,7 @@
+paho-mqtt
+sqlalchemy
+pymysql
+pydantic
+cryptography>=3.4.7
+azure-data-tables
+requests

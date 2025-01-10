@@ -1,0 +1,156 @@
+networks:
+  se4iot-network:
+    driver: bridge
+
+volumes:
+  azurite_data:
+    driver: local
+  mysql_data:
+    driver: local
+  mqtt_data:
+    driver: local
+
+services:
+  sensor-simulator:
+    container_name: sensors_simulation
+    build:
+      context: ./
+      dockerfile: ./SensorsSim/Dockerfile
+    environment:
+      DATA_GENERATION_INTERVAL_SEC: ${DATA_GENERATION_INTERVAL_SEC}
+      MQTT_BROKER: ${MQTT_BROKER}
+      MQTT_PORT: ${MQTT_PORT}
+      MQTT_TOPIC_PREFIX: ${MQTT_TOPIC_PREFIX}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+    depends_on:
+      mosquitto:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    networks:
+      - se4iot-network
+    restart: on-failure
+
+  azurite:
+    container_name: azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    ports:
+      - "10000:10000" # Blob service
+      - "10001:10001" # Queue service
+      - "10002:10002" # Table service
+    environment:
+      - AZURITE_TABLE_PORT=10002
+    volumes:
+      - azurite_data:/data # Mount the azurite_data volume to persist data
+    networks:
+      - se4iot-network
+    restart: on-failure
+
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+    networks:
+      - se4iot-network
+    restart: on-failure
+
+  mysql:
+    image: "mysql:8.0"
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - se4iot-network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "mysqladmin",
+          "ping",
+          "-h",
+          "${DB_HOST}",
+          "-u",
+          "${DB_USER}",
+          "--password=${DB_PASSWORD}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  angular_app:
+    container_name: dashboard
+    build:
+      context: ./Frontend
+      dockerfile: Dockerfile
+      args:
+        AUTH0_DOMAIN: ${AUTH0_DOMAIN}
+        AUTH0_CLIENT_ID: ${AUTH0_CLIENT_ID}
+        AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
+    ports:
+      - "8080:80"
+    networks:
+      - se4iot-network
+    environment:
+      - AUTH0_DOMAIN=${AUTH0_DOMAIN}
+      - AUTH0_CLIENT_ID=${AUTH0_CLIENT_ID}
+      - AUTH0_AUDIENCE=${AUTH0_AUDIENCE}
+
+  api:
+    build:
+      context: ./
+      dockerfile: ./RESTApi/Dockerfile
+    container_name: restapi_app
+    ports:
+      - "8000:8000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      AZURE_STORAGE_SERVICE: ${STORAGE_SERVICE}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      AUTH0_DOMAIN: ${AUTH0_DOMAIN}
+      AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
+    networks:
+      - se4iot-network
+
+  data_processor:
+    build:
+      context: ./
+      dockerfile: ./DataProcessor/Dockerfile
+    container_name: data_processor
+    environment:
+      GET_FORECAST_INTERVAL_SEC: ${GET_FORECAST_INTERVAL_SEC}
+      MQTT_BROKER: ${MQTT_BROKER}
+      MQTT_PORT: ${MQTT_PORT}
+      MQTT_TOPIC_PREFIX: ${MQTT_TOPIC_PREFIX}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      AZURE_STORAGE_SERVICE: ${STORAGE_SERVICE}
+      BASE_WEATHER_API_URL: ${BASE_WEATHER_API_URL}
+    depends_on:
+      mosquitto:
+        condition: service_started
+      mysql:
+        condition: service_healthy
+    networks:
+      - se4iot-network

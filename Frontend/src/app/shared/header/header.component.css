@@ -1,0 +1,39 @@
+header {
+  width: 100%; /* Ensure full width */
+  max-width: 100%; /* Ignore global max-width */
+  background-color: #004d40; /* Dark green header */
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Keep on top */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between; /* Align items to the edges */
+  align-items: center; /* Center vertically */
+  width: 100%; /* Full width */
+  padding: 0 20px; /* Consistent padding */
+}
+
+.navbar .navbar-brand {
+  font-weight: bold; /* Make it stand out */
+}
+
+.navbar .d-flex {
+  align-items: center; /* Align user info vertically */
+  gap: 1rem; /* Add space between elements */
+}
+
+.navbar .user-info img {
+  border-radius: 50%; /* Circular profile picture */
+  width: 30px;
+  height: 30px;
+  margin-right: 0.5rem; /* Add space to the right */
+}
+
+.navbar .text-white {
+  font-size: 1rem; /* Standardize font size */
+}

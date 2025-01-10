@@ -1,0 +1,30 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-success">
+  <div class="container-fluid">
+    <!-- Left aligned brand -->
+    <a class="navbar-brand text-white fw-bold"
+      >Crop Harvest Optimization System Dashboard</a
+    >
+
+    <!-- Right aligned user info and login/logout buttons -->
+    <div class="ms-auto d-flex align-items-center">
+      <ng-container *ngIf="auth.isAuthenticated$ | async; else login">
+        <div
+          *ngIf="user$ | async as user"
+          class="user-info d-flex align-items-center"
+        >
+          <img
+            [src]="user.picture"
+            alt="User profile picture"
+            class="rounded-circle me-2"
+            style="width: 30px; height: 30px"
+          />
+          <span class="text-white me-3">{{ user.name }}</span>
+        </div>
+        <app-logoutbutton></app-logoutbutton>
+      </ng-container>
+      <ng-template #login>
+        <app-loginbutton></app-loginbutton>
+      </ng-template>
+    </div>
+  </div>
+</nav>

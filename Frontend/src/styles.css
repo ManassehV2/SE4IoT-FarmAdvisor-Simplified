@@ -1,0 +1,85 @@
+/* General body and html setup */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f5f5; /* Light background */
+}
+
+/* Full-width container setup */
+.container-fluid {
+  max-width: 3200px; /* Constrain width */
+  margin: 0 auto; /* Center it */
+  padding: 0 40px; /* Add padding */
+}
+
+main {
+  flex: 1; /* Allow it to grow and fill the space */
+  margin: 40px auto; /* Center main content */
+  width: 100%; /* Full width */
+  max-width: 1500px; /* Limit max width */
+  padding: 40px; /* Add padding */
+  background-color: #ffffff; /* White background */
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Header styles */
+header {
+  background-color: #004d40; /* Dark green header */
+  color: white;
+  padding: 10px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensure it stays on top */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%; /* Make the footer span the full width of the viewport */
+  background-color: #f8f9fa; /* Light gray footer background */
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  z-index: 1000; /* Keep it above other content */
+  text-align: center;
+  padding: 10px 20px;
+}
+
+footer .footer-container {
+  max-width: 1200px; /* Optional: Add a max width if needed for content alignment */
+  margin: 0 auto; /* Center content horizontally */
+  display: flex;
+  justify-content: space-between; /* Distribute content evenly */
+  align-items: center; /* Align content vertically */
+}
+
+footer a {
+  color: #6c757d; /* Muted link color */
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #28a745; /* Green hover color */
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 0 20px; /* Reduce side padding */
+  }
+
+  main {
+    padding: 20px; /* Reduce inner padding */
+    margin-top: 20px; /* Reduce top margin */
+  }
+
+  footer {
+    font-size: 0.9rem; /* Smaller footer text size */
+  }
+}

@@ -1,0 +1,44 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow" style="width: 400px">
+    <div class="card-body">
+      <h5 class="card-title text-center mb-4">New Farm</h5>
+
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!-- Farm Name Input -->
+        <div class="mb-3">
+          <label for="farmName" class="form-label">Farm Name</label>
+          <input
+            type="text"
+            id="farmName"
+            class="form-control"
+            formControlName="farmName"
+            placeholder="Enter farm name"
+          />
+        </div>
+
+        <!-- Location Input -->
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input
+            type="text"
+            id="location"
+            class="form-control"
+            formControlName="location"
+            placeholder="Enter location"
+          />
+        </div>
+
+        <!-- Submit Button -->
+        <div class="d-grid">
+          <button
+            type="submit"
+            class="btn btn-success"
+            [disabled]="form.invalid"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
