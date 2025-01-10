@@ -17,20 +17,20 @@ Before running the project, you need to set up the environment variables. This i
 
    ```env
    DB_HOST=mysql_db
-DB_PORT=3306
-DB_NAME=farmadvisor
-DB_USER=root
-DB_PASSWORD=password01
-STORAGE_SERVICE="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1;"
-MQTT_BROKER="mosquitto"
-MQTT_PORT=1883
-MQTT_TOPIC_PREFIX="farms"
-AUTH0_DOMAIN=dev-7q1hcma4yuzy68dc.us.auth0.com
-AUTH0_CLIENT_ID=lzEduAYKdEE4UH2IQudBZwBgfc8MhQvi
-AUTH0_AUDIENCE=http://localhost:8000
-BASE_WEATHER_API_URL=https://api.met.no/weatherapi/locationforecast/2.0
-GET_FORECAST_INTERVAL_SEC=60
-DATA_GENERATION_INTERVAL_SEC=60
+   DB_PORT=3306
+   DB_NAME=farmadvisor
+   DB_USER=root
+   DB_PASSWORD=password01
+   STORAGE_SERVICE="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1;"
+   MQTT_BROKER="mosquitto"
+   MQTT_PORT=1883
+   MQTT_TOPIC_PREFIX="farms"
+   AUTH0_DOMAIN=dev-7q1hcma4yuzy68dc.us.auth0.com
+   AUTH0_CLIENT_ID=lzEduAYKdEE4UH2IQudBZwBgfc8MhQvi
+   AUTH0_AUDIENCE=http://localhost:8000
+   BASE_WEATHER_API_URL=https://api.met.no/weatherapi/locationforecast/2.0
+   GET_FORECAST_INTERVAL_SEC=60
+   DATA_GENERATION_INTERVAL_SEC=60
    ```
 
 3. Save the file.
@@ -110,6 +110,6 @@ Below is the system architecture of the application:
 
 ![System Architecture](./System_Architecture.png)
 
-## Demo Video 
+## Demo Video
 
 🔗 [Demo video](https://drive.google.com/file/d/1q_oWiyis_RrzCsmatNgscPXRivqp7pZG/view?usp=share_link)
