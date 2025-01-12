@@ -16,7 +16,7 @@ Before running the project, you need to set up the environment variables. This i
 2. Add the following content to the `.env` file:
 
    ```env
-     DB_HOST=mysql_db
+   DB_HOST=mysql_db
    DB_PORT=3306
    DB_NAME=farmadvisor
    DB_USER=root
