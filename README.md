@@ -16,12 +16,13 @@ Before running the project, you need to set up the environment variables. This i
 2. Add the following content to the `.env` file:
 
    ```env
-   DB_HOST=mysql_db
+     DB_HOST=mysql_db
    DB_PORT=3306
    DB_NAME=farmadvisor
    DB_USER=root
    DB_PASSWORD=password01
-   STORAGE_SERVICE="DefaultEndpointsProtocol=http;AccountName=devstoreaccount1AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1;"
+   STORAGE_SERVICE=DefaultEndpointsProtocol=http;AccountName=devstoreaccount1;AccountKey=Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==;TableEndpoint=http://azurite:10002/devstoreaccount1;
+   AZURITE_TABLE_PORT=10002
    MQTT_BROKER="mosquitto"
    MQTT_PORT=1883
    MQTT_TOPIC_PREFIX="farms"
