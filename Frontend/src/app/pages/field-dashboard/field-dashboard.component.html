@@ -103,6 +103,7 @@
   >
     <div class="modal-dialog">
       <div class="modal-content">
+        <!-- Modal Header -->
         <div class="modal-header">
           <h5 class="modal-title" id="newSensorModalLabel">
             Create New Sensor
@@ -114,8 +115,11 @@
             aria-label="Close"
           ></button>
         </div>
+
+        <!-- Modal Body -->
         <div class="modal-body">
-          <form>
+          <form #sensorForm="ngForm">
+            <!-- Serial Number -->
             <div class="mb-3">
               <label for="serialNo" class="form-label">Serial Number</label>
               <input
@@ -123,9 +127,31 @@
                 id="serialNo"
                 class="form-control"
                 [(ngModel)]="newSensor.SerialNo"
+                name="serialNo"
                 required
+                minlength="3"
               />
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['serialNo']?.errors?.['required']
+              "
+                class="text-danger"
+              >
+                Serial Number is required.
+              </div>
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['serialNo']?.errors?.['minlength']
+              "
+                class="text-danger"
+              >
+                Serial Number must be at least 3 characters long.
+              </div>
             </div>
+
+            <!-- Optimal GDD -->
             <div class="mb-3">
               <label for="optimalGDD" class="form-label">Optimal GDD</label>
               <input
@@ -133,9 +159,31 @@
                 id="optimalGDD"
                 class="form-control"
                 [(ngModel)]="newSensor.OptimalGDD"
+                name="optimalGDD"
                 required
+                min="1"
               />
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['optimalGDD']?.errors?.['required']
+              "
+                class="text-danger"
+              >
+                Optimal GDD is required.
+              </div>
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['optimalGDD']?.errors?.['min']
+              "
+                class="text-danger"
+              >
+                Optimal GDD must be greater than 0.
+              </div>
             </div>
+
+            <!-- Longitude -->
             <div class="mb-3">
               <label for="long" class="form-label">Longitude</label>
               <input
@@ -143,9 +191,33 @@
                 id="long"
                 class="form-control"
                 [(ngModel)]="newSensor.Long"
+                name="long"
                 required
+                min="-180"
+                max="180"
               />
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['long']?.errors?.['required']
+              "
+                class="text-danger"
+              >
+                Longitude is required.
+              </div>
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                (sensorForm.controls['long']?.errors?.['min'] ||
+                  sensorForm.controls['long']?.errors?.['max'])
+              "
+                class="text-danger"
+              >
+                Longitude must be between -180 and 180.
+              </div>
             </div>
+
+            <!-- Latitude -->
             <div class="mb-3">
               <label for="lat" class="form-label">Latitude</label>
               <input
@@ -153,11 +225,35 @@
                 id="lat"
                 class="form-control"
                 [(ngModel)]="newSensor.Lat"
+                name="lat"
                 required
+                min="-90"
+                max="90"
               />
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                sensorForm.controls['lat']?.errors?.['required']
+              "
+                class="text-danger"
+              >
+                Latitude is required.
+              </div>
+              <div
+                *ngIf="
+                sensorForm.submitted &&
+                (sensorForm.controls['lat']?.errors?.['min'] ||
+                  sensorForm.controls['lat']?.errors?.['max'])
+              "
+                class="text-danger"
+              >
+                Latitude must be between -90 and 90.
+              </div>
             </div>
           </form>
         </div>
+
+        <!-- Modal Footer -->
         <div class="modal-footer">
           <button
             type="button"
@@ -169,7 +265,8 @@
           <button
             type="button"
             class="btn btn-success"
-            (click)="createSensor()"
+            [disabled]="sensorForm.invalid"
+            (click)="createSensor(sensorForm)"
           >
             Create Sensor
           </button>

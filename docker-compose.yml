@@ -43,7 +43,7 @@ services:
       - "10001:10001" # Queue service
       - "10002:10002" # Table service
     environment:
-      - AZURITE_TABLE_PORT=10002
+      - AZURITE_TABLE_PORT=${AZURITE_TABLE_PORT}
     volumes:
       - azurite_data:/data # Mount the azurite_data volume to persist data
     networks:

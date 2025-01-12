@@ -11,7 +11,7 @@ import { Chart, registerables } from 'chart.js';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { CommonModule } from '@angular/common';
 import * as bootstrap from 'bootstrap';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-field-dashboard',
@@ -76,7 +76,13 @@ export class FieldDashboardComponent implements OnInit, AfterViewInit {
     );
   }
 
-  createSensor(): void {
+  createSensor(sensorForm: NgForm): void {
+    // Check if the form is valid
+    if (sensorForm.invalid) {
+      sensorForm.form.markAllAsTouched(); // Highlight all invalid fields
+      return;
+    }
+
     const fieldId = this.route.snapshot.paramMap.get('fieldId');
     if (!fieldId) {
       console.error('No Field ID provided.');
@@ -109,6 +115,7 @@ export class FieldDashboardComponent implements OnInit, AfterViewInit {
   }
 
   closeSensorModal(): void {
+    // Reset the form and sensor data
     this.newSensor = {
       SerialNo: '',
       OptimalGDD: 0,
