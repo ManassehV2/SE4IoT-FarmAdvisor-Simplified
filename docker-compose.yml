@@ -127,6 +127,11 @@ services:
       DB_NAME: ${DB_NAME}
       AUTH0_DOMAIN: ${AUTH0_DOMAIN}
       AUTH0_AUDIENCE: ${AUTH0_AUDIENCE}
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:8000/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     networks:
       - se4iot-network
 
@@ -151,6 +156,8 @@ services:
       mosquitto:
         condition: service_started
       mysql:
+        condition: service_healthy
+      api:
         condition: service_healthy
     networks:
       - se4iot-network

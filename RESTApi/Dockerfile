@@ -1,6 +1,9 @@
 # Use an official Python image
 FROM python:3.9-slim
 
+# Install curl
+RUN apt-get update && apt-get install -y curl && apt-get clean
+
 # Set work directory
 WORKDIR /app
 
