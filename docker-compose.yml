@@ -31,6 +31,8 @@ services:
         condition: service_started
       mysql:
         condition: service_healthy
+      api:
+        condition: service_healthy
     networks:
       - se4iot-network
     restart: on-failure
