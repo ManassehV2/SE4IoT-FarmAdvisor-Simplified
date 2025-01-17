@@ -30,7 +30,7 @@ Before running the project, you need to set up the environment variables. This i
    AUTH0_CLIENT_ID=lzEduAYKdEE4UH2IQudBZwBgfc8MhQvi
    AUTH0_AUDIENCE=http://localhost:8000
    BASE_WEATHER_API_URL=https://api.met.no/weatherapi/locationforecast/2.0
-   GET_FORECAST_INTERVAL_SEC=60
+   GET_FORECAST_INTERVAL_SEC=120
    DATA_GENERATION_INTERVAL_SEC=60
    ```
 
